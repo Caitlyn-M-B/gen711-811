@@ -32,12 +32,40 @@ What would the output look like if the wildcard could *not* be matched? Compare 
 Navigate to your home directory. From there, list the contents of the untrimmed_fastq directory.
 
 
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Relative path resolution
+
+Using the filesystem diagram below, if `pwd` displays `/Users/thing`,
+what will `ls ../backup` display?
+
+1. `../backup: No such file or directory`
+2. `2012-12-01 2013-01-08 2013-01-27`
+3. `2012-12-01/ 2013-01-08/ 2013-01-27/`
+4. `original pnas_final pnas_sub`
+
+![](fig/filesystem-challenge.svg){alt='File System for Challenge Questions'}
+
+:::::::::::::::  solution
+
+## Solution
+
+1. No: there *is* a directory `backup` in `/Users`.
+2. No: this is the content of `Users/thing/backup`,
+  but with `..` we asked for one level further up.
+3. No: see previous explanation.
+  Also, we did not specify `-F` to display `/` at the end of the directory names.
+4. Yes: `../backup` refers to `/Users/backup`.
+
+:::::::::::::::::::::::::
+
+
 ### EXERCISE 4: FINDING HIDDEN DIRECTORIES
 First navigate to the shell_data directory. There is a hidden directory within this directory. Explore the options for ls to find out how to see hidden directories. List the contents of the directory and identify the name of the text file in that directory.
 
 Hint: hidden files and folders in Unix start with ., for example .my_hidden_directory
 
-
+What is the hidden file name in the hidden directory?
 
 ### EXERCISE 5: HISTORY
 Find the line number in your history for the command that listed all the .sh files in /usr/bin. Rerun that command.
@@ -72,6 +100,10 @@ Make sure that you have deleted your backup directory and all files it contains.
 Create a backup of each of your FASTQ files using cp. (Note: You’ll need to do this individually for each of the two FASTQ files. We haven’t learned yet how to do this with a wildcard.)
 Use a wildcard to move all of your backup files to a new backup directory.
 Change the permissions on all of your backup files to be write-protected.
+
+
+### EXERCISE 10: PROGRAMS
+After loading a conda environment, where is the program 'fastqc' stored?
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 

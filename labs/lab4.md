@@ -99,7 +99,7 @@ C:CCC::CCCCCCCC<8?6A:C28C<608
 ### EXERCISE 7: PATHS
 From your home directory, and without changing directories, use one short command to print the contents of all of the files in the ~/shell_data/untrimmed_fastq directory.
 
-### EXERCISE 8: LESS
+### EXERCISE 8: LESS (Sequence = TTTTTq)
 What are the next three nucleotides (characters) after the first instance of the sequence quoted above?
 
 hit q to escape less!

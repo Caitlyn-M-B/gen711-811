@@ -23,14 +23,24 @@ exercises: 15
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ### EXERCISE 1: NAVIGATION PRACTICE
-Navigate to your untrimmed_fastq directory in one command
+Navigate to your untrimmed_fastq directory in one command:
+
+```cd gen711-811/shell_data/untrimmed_fastq/```
+
+Good practice to write this as one line for reproducability, plus it's just nicer as one line as opposed to three, one for each cd command
+
+```ls ../../``` lists directories going back as many .. as you add. Two in this case, back to home. ```../``` kind of means "take a step back".
 
 ### EXERCISE 2: WILDCARDS
 What would the output look like if the wildcard could *not* be matched? Compare the outputs
 
+```ls *fq```
+ls: cannot access '*fq': No such file or directory
+
 ### EXERCISE 3: NAVIGATING PRACTICE
 Navigate to your home directory. From there, list the contents of the untrimmed_fastq directory.
 
+```ls gen711-811/shell_data/untrimmed_fastq/```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
@@ -66,18 +76,42 @@ First navigate to the shell_data directory. There is a hidden directory within t
 Hint: hidden files and folders in Unix start with ., for example .my_hidden_directory
 
 What is the hidden file name in the hidden directory?
+.hidden
+
+```ls --``` shows all list commands to choose what you want to list. 
+- ```--all``` shows all files, including hidden files.
+- Hidden files have a period in front of them as convention. May not be needed for average user to run code, but needed to make it work. Becasue of this convention, hidden files can also be found with ```ls .*```
+
+``` ls -laF``` show all files in long form with slash and directory format.
 
 ### EXERCISE 5: HISTORY
 Find the line number in your history for the command that listed all the .sh files in /usr/bin. Rerun that command.
 
+```history | grep 'search term'``` to find past commands including the search term
+
+141 ```ls /usr/bin/*.sh```
+
 ### EXERCISE 6: FILE CONTENTS
 Print out the contents of the ~/shell_data/untrimmed_fastq/SRR097977.fastq file. What is the last line of the file?
+
+C:CCC::CCCCCCCC<8?6A:C28C<608
 
 ### EXERCISE 7: PATHS
 From your home directory, and without changing directories, use one short command to print the contents of all of the files in the ~/shell_data/untrimmed_fastq directory.
 
 ### EXERCISE 8: LESS
 What are the next three nucleotides (characters) after the first instance of the sequence quoted above?
+
+hit q to escape less!
+Type /sequence to search in a less document. For example, /TTTTT will show all sequences of TTTTT.
+
+Three nucleotides = CAC
+
+```mkdir``` make directory
+
+```cp 'old file' 'new file name'``` copy file
+
+```mv``` move file
 
 ### File Permissions Help
 The first part of the output for the `-l` flag gives you information about the file's current permissions. There are ten slots in the

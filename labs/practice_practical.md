@@ -31,13 +31,34 @@ ctrl c & ctrl v into a new .md file.
 ### 3. Copy the fastq files /tmp/gen711_2023/Sample1.fastq and /tmp/gen711_2023/Sample2.fastq directly into the 'analysis' directory without changing your current directory. (2 points, partial credit if you need to change directories first)
 For todays practice practical, use SRR fastqs instead
 
-
+```
+cp 'shell_data/untrimmed_fastq/SRR097977.fastq' 'analysis/SRR097977.fastq'
+cp 'shell_data/untrimmed_fastq/SRR098026.fastq' 'analysis/SRR098026.fastq'
+```
 
 ### 4. Use an absolute path to change your current working directory to the 'analysis' folder/directory. (2 points, partial credit for using a relative path)
 
+```cd gen711-811/analysis/```
+
 ### 5. The fastq file you just copied is data from the UNH genome center. This is the first time you've ever seen these FASTQs. To confirm that the format of the FASTQs look ok, view one of the two files and paste the top 4 lines of the file below. (4 points) 
 
+```
+[cmb1451@ron analysis]$ head SRR097977.fastq
+@SRR097977.1 209DTAAXX_Lenski2_1_7:8:3:710:178 length=36
+TATTCTGCCATAATGAAATTCGCCACTTGTTAGTGT
++SRR097977.1 209DTAAXX_Lenski2_1_7:8:3:710:178 length=36
+CCCCCCCCCCCCCCC>CCCCC7CCCCCCACA?5A5<
+```
+
 ### 6. You've decided that you want to make a seperate file of the reads to BLAST them at NCBI to make sure they belong to the species that you seqiuenced. However, your blast program is written to accept FASTA files rather than FASTQ files (FASTA files only contain the header line above the read, and the read itself). You will need to make a 'FASTA' file from each FASTQ file. Before you make the new files, pipe the output to a command that that allows you to see just the first lines of the output. (5 points)  
+
+To preview:
+```grep -A1 --no-group-separator '@SRR' SRR097977.fastq```
+
+To make file:
+```grep -A1 --no-group-separator '@SRR' SRR097977.fastq > SRR097977.fasta```
+
+```grep -A1 --no-group-separator '@SRR' SRR098026.fastq > SRR098026.fasta```
 
 #### Hints: 
 ### FASTA only needs 2/4 lines that are in a FASTQ: 1) the header line that starts with '@' and 2) the sequence right after the header. However, the base call quality scores could contain '@' as well, which might lead to unwanted matches. 
@@ -46,18 +67,43 @@ For todays practice practical, use SRR fastqs instead
 
 ### 7. Redirect the output of your command (command in 6 that is converting the format of the FASTQ into FASTA) into new files. Give the new file the same names, but uses the '.fasta' extension rather than the '.fastq' extension of the original file name. (5 points)
 
+I did that already
+
 ### 8. How many reads have 15 or more uncalled bases (NNNNNNNNNNNNNNN) in both samples? Count the number of reads in both WITHOUT making a new file. (4 points)
+
+```
+grep 'NNNNNNNNNNNNNNN' *.fasta | wc
+    100     100    5200
+```
 
 ### 9. Make a new directory called 'to_blast' in your current directory. Then, move the two fasta files into this new 'to_blast' directory (4 points)
 
+```
+mkdir 'to_blast'
+mv *.fasta to_blast/
+```
+
 ### 10. Without changing directories, what command could you use to confirm that the files made it into the 'to_blast' folder. (2 points)
+
+ls, and check for the absence of the files moved. 
 
 ### 11. What is the 100th line in the Sample1.fasta file? (hint: the 'head' command is one way to do this- but you may need to specify an option) (2 points)
 
+```head -100 SRR097977.fasta```
+...100 lines later...
+```GCGGAGCTGGTGATTGGCGAACTGCTGCTGCTATTT```
+
 ### 12. Run md5sum on Sample1.fasta (md5sum Sample1.fasta). Then, run it again, but redirect the output to a new file called 'my_md5sums.txt'.  (2 points)
+
+```md5sum SRR097977.fasta > my_md5sums.txt```
 
 ### 13. Next, run the md5sum command on Sample2.fasta and add it the the end of 'my_md5sums.txt'. (2 points)
 
+```md5sum SRR098026.fasta >> my_md5sums.txt```
+
 ### 14. Lastly, add your name to the end of 'my_md5sums.txt' file. (2 points)
 
+```echo 'Caitlyn Bailey' >> my_md5sums.txt```
+
 ### Extra credit: Run fastqc on one of the fastq files, and one of the fasta files. Did they both run? Why or why not?  (2 points)
+
